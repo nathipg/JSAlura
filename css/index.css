@@ -133,6 +133,11 @@ button[disabled=disabled], button:disabled {
 	border: 1px solid red;
 }
 
-.invalido {
+tr.invalido {
 	background-color: orange;
+}
+
+span.invalido {
+	color: orange;
+	font-weight: bold;
 }

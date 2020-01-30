@@ -33,6 +33,18 @@ document.querySelector('#adicionar-paciente').addEventListener('click', (event) 
     
     const form = document.querySelector('#form-adiciona');
     const paciente = getDadosPacienteForm(form);
+    const mensagemErro = document.querySelector('#mensagem-erro');
+    const erroPaciente = validaPaciente(paciente);
+
+    mensagemErro.textContent = '';
+
+    if(erroPaciente.length > 0) {
+        mensagemErro.textContent = erroPaciente;
+        return false;
+    }
+
+    paciente.gordura = paciente.gordura.length == 0 ? 0 : paciente.gordura;
+
     const pacienteTr = montaTrPaciente(paciente);
 
     document.querySelector('#tabela-pacientes').appendChild(pacienteTr);
