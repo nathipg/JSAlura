@@ -9,7 +9,23 @@ getDadosPacienteForm = (form) => {
 };
 
 montaTrPaciente = (paciente) => {
+    let pacienteTr = document.createElement('tr');
+    pacienteTr.classList.add('paciente');
 
+    pacienteTr.appendChild(montaTd(paciente.nome, 'nome'));
+    pacienteTr.appendChild(montaTd(paciente.peso, 'peso'));
+    pacienteTr.appendChild(montaTd(paciente.altura, 'altura'));
+    pacienteTr.appendChild(montaTd(paciente.gordura, 'gordura'));
+    pacienteTr.appendChild(montaTd(paciente.imc, 'imc'));
+
+    return pacienteTr;
+};
+
+montaTd = (dado, classe) => {
+    let td = document.createElement('td');
+    td.classList.add(`info-${classe}`);
+    td.textContent = dado;
+    return td;
 };
 
 document.querySelector('#adicionar-paciente').addEventListener('click', (event) => {
@@ -17,25 +33,9 @@ document.querySelector('#adicionar-paciente').addEventListener('click', (event) 
     
     const form = document.querySelector('#form-adiciona');
     const paciente = getDadosPacienteForm(form);
-
-    let pacienteTr = document.createElement('tr');
-    let nomeTd = document.createElement('td');
-    let pesoTd = document.createElement('td');
-    let alturaTd = document.createElement('td');
-    let gorduraTd = document.createElement('td');
-    let imcTd = document.createElement('td');
-
-    nomeTd.textContent = paciente.nome;
-    pesoTd.textContent = paciente.peso;
-    alturaTd.textContent = paciente.altura;
-    gorduraTd.textContent = paciente.gordura;
-    imcTd.textContent = paciente.imc;
-
-    pacienteTr.appendChild(nomeTd);
-    pacienteTr.appendChild(pesoTd);
-    pacienteTr.appendChild(alturaTd);
-    pacienteTr.appendChild(gorduraTd);
-    pacienteTr.appendChild(imcTd);
+    const pacienteTr = montaTrPaciente(paciente);
 
     document.querySelector('#tabela-pacientes').appendChild(pacienteTr);
+
+    form.reset();
 });
